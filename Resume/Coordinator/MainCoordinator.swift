@@ -37,17 +37,26 @@ final class MainCoordinator {
         let mainBoard = UIStoryboard(name: StoryBoard.main.rawValue, bundle: nil)
         let profileController = mainBoard.instantiateViewController(withIdentifier: ControllerIdentifier.profile.rawValue) as? ProfileController
         profileController?.profile = self.profile
-        profileController?.refresh = self.refresh
         profileController?.select = self.select
         self.window?.rootViewController = UINavigationController(rootViewController: profileController!)
         self.profileControler = profileController
+        
+        self.refreshProfile()
     }
 }
 
 // MARK: - Profile application flow
 extension MainCoordinator {
-    func refresh(profile: Profile) {
-        debugPrint("This is the default refresh callback implementation")
+    func refreshProfile() {
+        let failure: (NSError) -> () = { error in
+            debugPrint(error.localizedDescription)
+        }
+        
+        let completion: (String) -> () = { string in
+            debugPrint(string)
+        }
+        
+        QueryAPI.shared.getProfile(fail: failure, completion: completion)
     }
     
     func select(section: Section) {
