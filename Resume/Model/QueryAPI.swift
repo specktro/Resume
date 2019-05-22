@@ -13,12 +13,19 @@ import Foundation
 final class QueryAPI {
     // MARK: - Attributes
     private var session: URLSession
+    private var profileURL: URL?
     
     // MARK: - Singleton stuff
     static let shared = QueryAPI()
     
     private init() {
         self.session = URLSession(configuration: .default)
+        
+        if let path = Bundle.main.path(forResource: "Info", ofType: "plist"),
+            let plist = NSDictionary(contentsOfFile: path) as? [AnyHashable: Any],
+            let urlString = plist["ProfileURL"] as? String {
+            self.profileURL = URL(string: urlString)
+        }
     }
     
     // MARK: - Public methods
@@ -29,7 +36,7 @@ final class QueryAPI {
      - Parameter completion: a closure for success call back.
      */
     public func getProfile(fail: @escaping ((NSError) -> (Void)), completion: @escaping ((Profile) -> (Void))) {
-        if let url = URL(string: "https://gist.githubusercontent.com/specktro/e29134eea63332a72fcf5453aec38eb9/raw/c1dc0aaca6add76cca77455155fddbc672cde37c/profile.json") {
+        if let url = self.profileURL {
             let profileTask = session.dataTask(with: url) { data, response, error in
                 if let error = error {
                     DispatchQueue.main.async {
