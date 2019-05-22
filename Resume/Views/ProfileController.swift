@@ -19,12 +19,8 @@ class ProfileController: UITableViewController {
         let sections = [Section(title: "Experience", url: "", summary: nil), Section(title: "Academic", url: "", summary: nil)]
         return Profile(name: name, nickname: nickname, summary: summary, tools: tools, sections: sections)
     }()
-    private var refresh: (Profile) -> () = { _ in
-        debugPrint("This is the default refresh callback implementation")
-    }
-    private var select: (Section) -> () = { section in
-        debugPrint("This is the default select callback implementation, the \(section.title) was choosen")
-    }
+    public var refresh: (Profile) -> () = { _ in }
+    public var select: (Section) -> () = { _ in }
     
     // MARK: - UIViewController methods
     override func viewDidLoad() {
