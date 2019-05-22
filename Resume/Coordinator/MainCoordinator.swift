@@ -27,6 +27,7 @@ final class MainCoordinator {
         let mainBoard = UIStoryboard(name: StoryBoard.main.rawValue, bundle: nil)
         let profileController = mainBoard.instantiateViewController(withIdentifier: ControllerIdentifier.profile.rawValue) as? ProfileController
         profileController?.select = self.select
+        profileController?.askProfile = self.refreshProfile
         self.window?.rootViewController = UINavigationController(rootViewController: profileController!)
         self.profileControler = profileController
         
@@ -37,11 +38,22 @@ final class MainCoordinator {
 // MARK: - Profile application flow
 extension MainCoordinator {
     func refreshProfile() {
+        self.profileControler?.tableView.refreshControl?.beginRefreshing()
+        
         let failure: (NSError) -> () = { error in
-            debugPrint(error.localizedDescription)
+            self.profileControler?.tableView.refreshControl?.endRefreshing()
+            
+            let alertController = UIAlertController(title: NSLocalizedString("Resume", comment: ""),
+                                                    message: error.localizedDescription,
+                                                    preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""),
+                                                    style: .cancel,
+                                                    handler: nil))
+            self.profileControler?.present(alertController, animated: true, completion: nil)
         }
         
         let completion: (Profile) -> () = { profile in
+            self.profileControler?.tableView.refreshControl?.endRefreshing()
             self.profileControler?.refresh(profile: profile)
         }
         

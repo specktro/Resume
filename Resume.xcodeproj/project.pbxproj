@@ -493,6 +493,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.specktro.resume;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROFILE_URL = "https://gist.githubusercontent.com/specktro/e29134eea63332a72fcf5453aec38eb9/raw/c1dc0aaca6add76cca77455155fddbc672cde37c/profile.json";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -511,6 +512,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.specktro.resume;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROFILE_URL = "https://gist.githubusercontent.com/specktro/e29134eea63332a72fcf5453aec38eb9/raw/c1dc0aaca6add76cca77455155fddbc672cde37c/profile.json";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
