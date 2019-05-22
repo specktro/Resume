@@ -14,16 +14,6 @@ final class MainCoordinator {
     // MARK: - Attributes
     public weak var window: UIWindow?
     fileprivate weak var profileControler: ProfileController?
-    fileprivate lazy var profile: Profile? = {
-        let name = "Miguel Angel Gómez Rivero"
-        let nickname = "specktro"
-        let summary = "An enthusiastic software developer"
-        let tools = "xcode, swift, git, coordinators"
-        let sections = [Section(title: "About", url: "", summary: "- Name: Miguel Angel Gomez Rivero\n- Twitter: @specktro\n- Instagram: specktro\n- Facebook: facebook.com/specktro"),
-                        Section(title: "Experience", url: "", summary: "An old iOS developer, with more than nine years working with the apple ecosystem, the iOS SDK is his vocation. \n\nHe forgot the number of developed applications by himself and now he loves to teach all he knows to the new iOS generation."),
-                        Section(title: "Academic", url: "", summary: "Specktro studied at ESCOM - IPN his computer science degree; since he was a child he experienced too much love about the maths and the money :v for that reason he became an engineer.")]
-        return Profile(name: name, nickname: nickname, summary: summary, tools: tools, sections: sections)
-    }()
     
     // MARK: - Initializers
     init(window: UIWindow) {
@@ -36,7 +26,6 @@ final class MainCoordinator {
     private func initialFlow() {
         let mainBoard = UIStoryboard(name: StoryBoard.main.rawValue, bundle: nil)
         let profileController = mainBoard.instantiateViewController(withIdentifier: ControllerIdentifier.profile.rawValue) as? ProfileController
-        profileController?.profile = self.profile
         profileController?.select = self.select
         self.window?.rootViewController = UINavigationController(rootViewController: profileController!)
         self.profileControler = profileController
@@ -52,8 +41,8 @@ extension MainCoordinator {
             debugPrint(error.localizedDescription)
         }
         
-        let completion: (String) -> () = { string in
-            debugPrint(string)
+        let completion: (Profile) -> () = { profile in
+            self.profileControler?.refresh(profile: profile)
         }
         
         QueryAPI.shared.getProfile(fail: failure, completion: completion)

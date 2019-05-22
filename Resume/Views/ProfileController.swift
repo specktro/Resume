@@ -12,7 +12,6 @@ import UIKit
 final class ProfileController: UITableViewController {
     // MARK: - Attributes
     public var profile: Profile?
-    public var refresh: (Profile) -> () = { _ in }
     public var select: (Section) -> () = { _ in }
     
     // MARK: - UIViewController methods
@@ -34,8 +33,13 @@ final class ProfileController: UITableViewController {
     
     // MARK: - Private methods
     private func customize() {
-        self.title = self.profile?.nickname
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: CellIdentifier.profile.rawValue)
+    }
+    
+    func refresh(profile: Profile) {
+        self.profile = profile
+        self.title = self.profile?.nickname
+        self.tableView.reloadData()
     }
     
     // MARK: - Table view stuff

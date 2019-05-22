@@ -8,7 +8,7 @@
 
 // MARK: - Profile struct
 /// The holder from user's information
-struct Profile {
+struct Profile: Codable {
     var name: String
     var nickname: String
     var summary: String
@@ -19,7 +19,7 @@ struct Profile {
 
 // MARK: - Profile struct
 /// The holder from user's information sections
-struct Section {
+struct Section: Codable {
     var title: String
     var url: String
     var summary: String?
