@@ -38,7 +38,13 @@ final class MainCoordinator {
 extension MainCoordinator {
     func refreshProfile() {
         let failure: (NSError) -> () = { error in
-            debugPrint(error.localizedDescription)
+            let alertController = UIAlertController(title: NSLocalizedString("Resume", comment: ""),
+                                                    message: error.localizedDescription,
+                                                    preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""),
+                                                    style: .cancel,
+                                                    handler: nil))
+            self.profileControler?.present(alertController, animated: true, completion: nil)
         }
         
         let completion: (Profile) -> () = { profile in
