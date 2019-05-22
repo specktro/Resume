@@ -13,18 +13,13 @@ final class ProfileController: UITableViewController {
     // MARK: - Attributes
     public var profile: Profile?
     public var select: (Section) -> () = { _ in }
+    public var askProfile: () -> () = { }
     
     // MARK: - UIViewController methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.customize()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     deinit {
@@ -34,12 +29,20 @@ final class ProfileController: UITableViewController {
     // MARK: - Private methods
     private func customize() {
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: CellIdentifier.profile.rawValue)
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(pull(_:)), for: .valueChanged)
+        self.tableView.refreshControl = refreshControl
     }
     
-    func refresh(profile: Profile) {
+    // MARK: - Public methods
+    public func refresh(profile: Profile) {
         self.profile = profile
         self.title = self.profile?.nickname
         self.tableView.reloadData()
+    }
+    
+    @objc public func pull(_ sender: UIRefreshControl) {
+        self.askProfile()
     }
     
     // MARK: - Table view stuff

@@ -22,12 +22,6 @@ final class DetailController: UIViewController {
         self.customize()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.navigationController?.navigationBar.prefersLargeTitles = false
-    }
-    
     deinit {
         debugPrint(">>> deinit \(String(describing: self))")
     }
