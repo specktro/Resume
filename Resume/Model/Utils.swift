@@ -22,4 +22,5 @@ enum StoryBoard: String {
 /// The enumeration for controllers' identifiers inside storyboards
 enum ControllerIdentifier: String {
     case profile = "Profile"
+    case detail = "Detail"
 }

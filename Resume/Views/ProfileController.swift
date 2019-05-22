@@ -9,16 +9,9 @@
 import UIKit
 
 // MARK: - ProfileController class
-class ProfileController: UITableViewController {
+final class ProfileController: UITableViewController {
     // MARK: - Attributes
-    private lazy var profile: Profile? = {
-        let name = "Miguel Angel Gómez Rivero"
-        let nickname = "specktro"
-        let summary = "An enthusiastic software developer"
-        let tools = "xcode, swift, git, coordinators"
-        let sections = [Section(title: "Experience", url: "", summary: nil), Section(title: "Academic", url: "", summary: nil)]
-        return Profile(name: name, nickname: nickname, summary: summary, tools: tools, sections: sections)
-    }()
+    public var profile: Profile?
     public var refresh: (Profile) -> () = { _ in }
     public var select: (Section) -> () = { _ in }
     
@@ -29,6 +22,12 @@ class ProfileController: UITableViewController {
         self.customize()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
     deinit {
         debugPrint(">>> deinit \(String(describing: self))")
     }
@@ -36,7 +35,6 @@ class ProfileController: UITableViewController {
     // MARK: - Private methods
     private func customize() {
         self.title = self.profile?.nickname
-        self.navigationController?.navigationBar.prefersLargeTitles = true
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: CellIdentifier.profile.rawValue)
     }
     
@@ -51,6 +49,7 @@ class ProfileController: UITableViewController {
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.profile.rawValue, for: indexPath)
+        cell.accessoryType = .disclosureIndicator
         cell.textLabel?.text = section.title
         return cell
     }
