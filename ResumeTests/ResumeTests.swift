@@ -9,26 +9,66 @@
 import XCTest
 @testable import Resume
 
+// MARK: - ResumeTests class
 class ResumeTests: XCTestCase {
-
+    
+    // MARK: - Super class methods
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        continueAfterFailure = false
     }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    
+    // MARK: - Tests methods
+    func testProfileResponse() {
+        let expectation = XCTestExpectation(description: NSLocalizedString("Verify profile JSON response", comment: ""))
+        
+        let failClosure: (NSError) -> () = { error in
+            if error.code == 1001 { // There was a service response but the profile was invalid
+                expectation.fulfill()
+            }
+            else {
+                XCTFail()
+            }
         }
+        
+        let successClosure: (Profile) -> () = { _ in
+            expectation.fulfill()
+        }
+        
+        QueryAPI.shared.getProfile(fail: failClosure, completion: successClosure)
+        wait(for: [expectation], timeout: 3.0)
     }
-
+    
+    func testProfileIntegrity() {
+        let expectation = XCTestExpectation(description: NSLocalizedString("Verify profile JSON integrity", comment: ""))
+        
+        let failClosure: (NSError) -> () = { error in
+            XCTFail()
+        }
+        
+        let successClosure: (Profile) -> () = { _ in
+            expectation.fulfill()
+        }
+        
+        QueryAPI.shared.getProfile(fail: failClosure, completion: successClosure)
+        wait(for: [expectation], timeout: 3.0)
+    }
+    
+    func testProfileSections() {
+        let expectation = XCTestExpectation(description: NSLocalizedString("Verify sections from JSON profile", comment: ""))
+        
+        let failClosure: (NSError) -> () = { error in
+            XCTFail()
+        }
+        
+        let successClosure: (Profile) -> () = { profile in
+            if profile.sections.count == 0 {
+                XCTFail()
+            }
+            
+            expectation.fulfill()
+        }
+        
+        QueryAPI.shared.getProfile(fail: failClosure, completion: successClosure)
+        wait(for: [expectation], timeout: 3.0)
+    }
 }
