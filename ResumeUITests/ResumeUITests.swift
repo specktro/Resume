@@ -10,6 +10,7 @@ import XCTest
 
 // MARK: - ResumeUITests class
 class ResumeUITests: XCTestCase {
+    // MARK: - Attributes
     let app = XCUIApplication()
     
     // MARK: - Super class methods
