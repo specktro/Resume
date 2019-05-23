@@ -24,3 +24,11 @@ enum ControllerIdentifier: String {
     case profile = "Profile"
     case detail = "Detail"
 }
+
+// MARK: - ProfileURL enumeration
+/// The enumeration to test the profile behavior
+enum ProfileURL: String {
+    case success = "ProfileURL"
+    case invalid = "BadProfileURL"
+    case noSections = "NoSectionsURL"
+}

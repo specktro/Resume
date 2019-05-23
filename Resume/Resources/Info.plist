@@ -41,5 +41,9 @@
 	</array>
 	<key>ProfileURL</key>
 	<string>$(PROFILE_URL)</string>
+	<key>BadProfileURL</key>
+	<string>$(BAD_PROFILE_URL)</string>
+	<key>NoSectionsURL</key>
+	<string>$(NO_SECTIONS_PROFILE_URL)</string>
 </dict>
 </plist>

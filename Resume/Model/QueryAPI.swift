@@ -13,7 +13,7 @@ import Foundation
 final class QueryAPI {
     // MARK: - Attributes
     private var session: URLSession
-    private var profileURL: URL?
+    private var plist: [AnyHashable: Any]?
     
     // MARK: - Singleton stuff
     static let shared = QueryAPI()
@@ -21,10 +21,8 @@ final class QueryAPI {
     private init() {
         self.session = URLSession(configuration: .default)
         
-        if let path = Bundle.main.path(forResource: "Info", ofType: "plist"),
-            let plist = NSDictionary(contentsOfFile: path) as? [AnyHashable: Any],
-            let urlString = plist["ProfileURL"] as? String {
-            self.profileURL = URL(string: urlString)
+        if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
+            self.plist = NSDictionary(contentsOfFile: path) as? [AnyHashable: Any]
         }
     }
     
@@ -35,8 +33,8 @@ final class QueryAPI {
      - Parameter fail: a closure for error call back.
      - Parameter completion: a closure for success call back.
      */
-    public func getProfile(fail: @escaping ((NSError) -> (Void)), completion: @escaping ((Profile) -> (Void))) {
-        if let url = self.profileURL {
+    public func getProfile(_ profile: ProfileURL = ProfileURL.success, fail: @escaping ((NSError) -> (Void)), completion: @escaping ((Profile) -> (Void))) {
+        if let urlString = self.plist?[profile.rawValue] as? String, let url = URL(string: urlString) {
             let profileTask = session.dataTask(with: url) { data, response, error in
                 if let error = error {
                     DispatchQueue.main.async {
