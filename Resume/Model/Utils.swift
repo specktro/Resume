@@ -25,6 +25,13 @@ enum ControllerIdentifier: String {
     case detail = "Detail"
 }
 
+// MARK: - APIError enum
+/// The enumeration for API error codes
+enum APIError: Int {
+    case profileService = 1000
+    case invalidProfile = 1001
+}
+
 // MARK: - ProfileURL enumeration
 /// The enumeration to test the profile behavior
 enum ProfileURL: String {

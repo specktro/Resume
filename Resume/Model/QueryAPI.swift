@@ -39,7 +39,7 @@ final class QueryAPI {
             let profileTask = session.dataTask(with: url) { data, response, error in
                 if let error = error {
                     DispatchQueue.main.async {
-                        fail(NSError(domain: "com.specktro.resume", code: 1000, userInfo: [NSLocalizedDescriptionKey: error.localizedDescription]))
+                        fail(NSError(domain: "com.specktro.resume", code: APIError.profileService.rawValue, userInfo: [NSLocalizedDescriptionKey: error.localizedDescription]))
                     }
                 }
                 else if let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200 {
@@ -52,7 +52,7 @@ final class QueryAPI {
                     }
                     else {
                         DispatchQueue.main.async {
-                            fail(NSError(domain: "com.specktro.resume", code: 1001, userInfo: [NSLocalizedDescriptionKey: NSLocalizedString("Invalid user profile", comment: "")]))
+                            fail(NSError(domain: "com.specktro.resume", code: APIError.invalidProfile.rawValue, userInfo: [NSLocalizedDescriptionKey: NSLocalizedString("Invalid user profile", comment: "")]))
                         }
                     }
                 }
