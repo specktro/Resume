@@ -30,6 +30,7 @@ final class QueryAPI {
     /**
      Gets the `Profile` struct
      
+     - Parameter profile: a value to get different JSON responsesm its default value is success
      - Parameter fail: a closure for error call back.
      - Parameter completion: a closure for success call back.
      */
