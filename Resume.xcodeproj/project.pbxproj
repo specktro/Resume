@@ -484,6 +484,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BAD_PROFILE_URL = "https://gist.githubusercontent.com/specktro/460b008298ec51b32289c3a109f98fda/raw/e4aa21adfd6c1cff30589642c227c8b17c01619a/bad_profile.json";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TKH856G5A9;
 				INFOPLIST_FILE = Resume/Resources/Info.plist;
@@ -491,6 +492,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				NO_SECTIONS_PROFILE_URL = "https://gist.githubusercontent.com/specktro/0198e36b8beabd12ec9ee7650d0282cf/raw/06f0f768cc38b2f2a45147971238b386a0f8ad4a/no_sections_profile.json";
 				PRODUCT_BUNDLE_IDENTIFIER = com.specktro.resume;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROFILE_URL = "https://gist.githubusercontent.com/specktro/e29134eea63332a72fcf5453aec38eb9/raw/c1dc0aaca6add76cca77455155fddbc672cde37c/profile.json";
@@ -503,6 +505,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BAD_PROFILE_URL = "https://gist.githubusercontent.com/specktro/460b008298ec51b32289c3a109f98fda/raw/e4aa21adfd6c1cff30589642c227c8b17c01619a/bad_profile.json";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TKH856G5A9;
 				INFOPLIST_FILE = Resume/Resources/Info.plist;
@@ -510,6 +513,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				NO_SECTIONS_PROFILE_URL = "https://gist.githubusercontent.com/specktro/0198e36b8beabd12ec9ee7650d0282cf/raw/06f0f768cc38b2f2a45147971238b386a0f8ad4a/no_sections_profile.json";
 				PRODUCT_BUNDLE_IDENTIFIER = com.specktro.resume;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROFILE_URL = "https://gist.githubusercontent.com/specktro/e29134eea63332a72fcf5453aec38eb9/raw/c1dc0aaca6add76cca77455155fddbc672cde37c/profile.json";
